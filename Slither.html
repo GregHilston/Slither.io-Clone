@@ -14,7 +14,6 @@
 
             class Player {
                 constructor() {
-
                     this.height = canvas.height / 20;
                     this.width = canvas.width / 20;
                     this.xLoc = canvas.width / 2;
@@ -38,16 +37,20 @@
 
             canvas.addEventListener('mousemove', function(evt) {
                 var mousePos = getMousePos(canvas, evt);
-                player.xLoc = mousePos.x;
-                player.yLoc = mousePos.y;
+                document.getElementById("loc").textContent = "Mouse Location (" + mousePos.x + "," + mousePos.y + ")";
             }, false);
 
+            function updateHeading() {
+
+            }
+
             function updateLocation() {
-                document.getElementById("loc").textContent = "Player Location (" + player.xLoc + "," + player.yLoc + ")";
+
             }
 
             function gameLoop() {
                 time = setInterval(function () {
+                    updateHeading();
                     updateLocation();
                 }, 10);
             }
