@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Javascript Game</title>
+        <title>Slither.io Clone</title>
+        <label id="loc"></label>
     </head>
     <body>
-        <label id="loc"></label>
-        <canvas id="gameCanvas" width=500 height=500 />
+        <canvas id="gameCanvas" width=1500 height=900 />
 
         <script>
             var player;
             var canvas = document.getElementById('gameCanvas');
+            var context = canvas.getContext("2d");
 
             class Player {
                 constructor() {
@@ -23,6 +24,8 @@
 
             function initialize() {
                 player = new Player();
+                context.fillStyle = "#FF0000";
+                context.fillRect(player.xLoc , player.yLoc, player.width, player.height);
             }
 
             function getMousePos(canvas, evt) {
@@ -43,16 +46,9 @@
                 document.getElementById("loc").textContent = "Player Location (" + player.xLoc + "," + player.yLoc + ")";
             }
 
-            function repaint() {
-                var ctx = canvas.getContext("2d");
-                ctx.fillStyle = "#FF0000";
-                ctx.fillRect(player.xLoc , player.yLoc, player.width, player.height);
-            }
-
             function gameLoop() {
                 time = setInterval(function () {
                     updateLocation();
-                    repaint();
                 }, 10);
             }
             initialize()
