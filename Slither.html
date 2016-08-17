@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Javascript Game</title>
+    </head>
+    <body>
+        <label id="loc"></label>
+        <canvas id="gameCanvas" width=500 height=500 />
+
+        <script>
+            var player;
+
+            class Player {
+                constructor() {
+                    var canvas = document.getElementById('gameCanvas');
+
+                    this.height = canvas.height / 20;
+                    this.width = canvas.width / 20;
+                    this.xLoc = canvas.width / 2;
+                    this.yLoc = canvas.height / 2;
+                }
+            }
+
+            function moveSelection(evt) {
+                switch (evt.keyCode) {
+                    // Left Arrow Pressed
+                    case 37:
+                        player.xLoc--;
+                        break;
+                    // Right Arrow Pressed
+                    case 39:
+                        player.xLoc++;
+                        break;
+                    // Up Arrow Pressed
+                    case 38:
+                        player.yLoc--;
+                        break;
+                    // Down Arrow Pressed
+                    case 40:
+                        player.yLoc++;
+                        break;
+                }
+            };
+
+            function initialize() {
+                player = new Player();
+                window.addEventListener('keydown', moveSelection);
+            }
+
+            function updateLocation() {
+                document.getElementById("loc").textContent = "Player Location (" + player.xLoc + "," + player.yLoc + ")";
+            }
+
+            function repaint() {
+                var canvas = document.getElementById("gameCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = "#FF0000";
+                ctx.fillRect(player.xLoc , player.yLoc, player.width, player.height);
+            }
+
+            function gameLoop() {
+                time = setInterval(function () {
+                    updateLocation();
+                    repaint();
+                }, 10);
+            }
+            initialize()
+            gameLoop()
+        </script>
+    </body>
+</html>
